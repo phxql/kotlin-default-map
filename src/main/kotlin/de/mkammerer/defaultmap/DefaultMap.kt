@@ -21,7 +21,7 @@ interface DefaultMap<K, out V> : Map<K, V> {
  * @param map Map, which contains the values.
  * @param default The default value, which is returned if the key is not found in [map].
  */
-class DefaultMapImpl<K, out V>(val map: Map<K, V>, val default: V) : Map<K, V>, DefaultMap<K, V> {
+class DefaultMapImpl<K, out V>(val map: Map<K, V>, val default: V) : DefaultMap<K, V> {
     override val entries: Set<Map.Entry<K, V>>
         get() = map.entries
     override val keys: Set<K>
