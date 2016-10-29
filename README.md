@@ -15,9 +15,50 @@ assertThat(map[3], equalTo("???"))
 val value: String = map[1]
 ```
 
+## Downloading
+### Gradle
+
+```groovy
+repositories {
+    maven {
+        url  "https://dl.bintray.com/phxql/maven"
+    }
+}
+
+dependencies {
+    compile 'de.mkammerer:kotlin-default-map:1.0'
+}
+```
+
+### Maven
+
+Add this repository:
+
+```xml
+<repositories>
+  <repository>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+    <id>bintray-phxql-maven</id>
+    <name>bintray</name>
+    <url>https://dl.bintray.com/phxql/maven</url>
+  </repository>
+</repositories>
+```
+You can then use the following Maven coordinates:
+
+```xml
+<dependency>
+    <groupId>de.mkammerer</groupId>
+    <artifactId>kotlin-default-map</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
 ## License
 
-LGPLv3
+[LGPLv3](LICENSE)
 
 ## Maintainer
 
