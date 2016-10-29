@@ -1,6 +1,3 @@
-group 'de.mkammerer'
-version '1.0-SNAPSHOT'
-
 buildscript {
     ext.kotlin_version = '1.0.4'
     repositories {
@@ -12,14 +9,54 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.jfrog.bintray" version "1.7"
+}
+
+group 'de.mkammerer'
+version '1.0-SNAPSHOT'
+
 apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
 repositories {
     mavenCentral()
+}
+
+publishing {
+    publications {
+        ThePublication(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['ThePublication']
+    pkg {
+        repo = 'maven'
+        name = project.name
+        licenses = ['LGPL-3.0']
+        vcsUrl = 'https://github.com/phxql/kotlin-default-map.git'
+        version {
+            name = project.version
+        }
+    }
 }
 
 task wrapper(type: Wrapper) {
